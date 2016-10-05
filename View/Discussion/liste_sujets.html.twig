@@ -1,0 +1,79 @@
+{% extends "baseLayout.html.twig" %}
+
+{% block title %}{{ categorie }}{% endblock %}
+
+{% block content %}
+	<main>
+		<header>
+			<h2>{{ categorie }}</h2>
+		</header>
+
+		<div class="col-xs-1 col-sm-2 col-md-3">
+		</div>
+
+		<div class="col-xs-10 col-sm-8 col-md-6">
+			<section>
+				<div class="row">
+				{% if subjects|length == 0 %}
+					<h3>Aucun sujet n'existe dans cette catégorie.</h3>
+					<p>Soyez le premier à créer un sujet dans cette catégorie !</p>
+				{% else %}
+					<div class="list-group">
+						{% for subject in subjects %}
+							<a href="/{{ categorie }}/{{ subject.titre }}" class="list-group-item">
+								<h3 class="list-group-item-heading">{{ subject.titre }} <small>créé par <b>{{ subject.pseudo }}</b> le {{ subject.dateSujet|date("m/d/Y à H:i", "Europe/Paris") }}</small></h3>
+								<p class="list-group-item-text">{{ subject.description }}</p>
+							</a>
+						{% endfor %}
+					</div>
+				{% endif %}
+				</div>
+			</section>
+
+			<section>
+				<div class="row well" id="formulaire">
+					<form action="" method="post">
+						<div class="form-group">
+							<label class="sr-only" for="titre">Titre du sujet</label>
+							<div class="input-group">
+								<span class="input-group-addon">Titre</span>
+	  							<input type="text" class="form-control" name="titre" />
+							</div>
+						</div>
+						<br/>
+
+						<textarea class="form-control" rows="4" placeholder="Une description du sujet..." name="description"></textarea>
+						<br/>
+
+						<button type="submit" class="btn btn-primary">Créer</button>
+					</form>
+				</div>
+
+				{% if pseudo is defined and not pseudo.banni %}
+					{% if subjects|length == 0 %}
+						<button class="btn btn-primary" id="new_subject">Créer le premier sujet</button>
+					{% else %}
+						<button class="btn btn-primary" id="new_subject">Nouveau Sujet</button>
+					{% endif %}
+				{% endif %}
+			</section>
+		</div>
+
+		<div class="col-xs-1 col-sm-2 col-md-3"></div>
+	</main>
+{% endblock %}
+
+{% block script %}
+	<script>
+		// Au chargement de la page
+		$(document).ready(function(){
+			$("#formulaire").hide();
+		});
+
+		// Après avoir cliqué sur le bouton "Nouveau Sujet"
+		$("#new_subject").click(function() {
+			$("#formulaire").toggle("slide");
+			$("#new_subject").hide();
+		});
+	</script>
+{% endblock %}

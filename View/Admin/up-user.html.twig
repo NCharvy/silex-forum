@@ -1,0 +1,54 @@
+{% extends "tpl-back.html.twig" %}
+
+{% block css %}
+    <link href="/web/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/web/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/style-admin.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main>
+    <h2>Fiche détaillée de {{ auser.pseudo }}</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <a class="btn btn-primary" href="{{ referer }}" role="button" style="margin-bottom : 12%;"><i class="icon-circle-arrow-left"></i> Retour</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form class="form-horizontal" method="post" action="/user-update">
+                            <div class="form-group">
+                                <input type="hidden" name="iduser" value={{ "#{auser.idUtil}" }}/>
+                                <label for="nomCat" class="col-sm-6 control-label">Banissement de l'utilisateur : </label>
+                                <div class="col-sm-6">
+                                    Oui <input type="radio" name="banni" value="1" {% if auser.banni == 1 %} checked {% endif %}/>
+                                    Non <input type="radio" name="banni" value="0" {% if auser.banni == 0 %} checked {% endif %} />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nomCat" class="col-sm-2 control-label">Rôle : </label>
+                                <div class="col-sm-8">
+                                    Administrateur <input type="radio" name="role" value="admin" {% if auser.administrateur == 1  %} checked {% endif %}/>
+                                    Modérateur <input type="radio" name="role" value="modo" {% if auser.moderateur == 1 %} checked {% endif %} />
+                                    Utilisateur <input type="radio" name="role" value="util" {% if auser.moderateur == 0 and auser.administrateur == 0 %} checked {% endif %} />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9"></div>
+                                <div class="col-sm-2">
+                                    <button type="submit" class="button-update btn btn-primary">Mise à jour</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</main>
+{% endblock %}

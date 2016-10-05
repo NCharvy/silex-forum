@@ -1,0 +1,57 @@
+{% extends "tpl-back.html.twig" %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <header class="navbar navbar-inverse">
+                    <div class="container">
+                        <nav id="navbar" class="navbar-collapse collapse">
+                            <ul id="nav-admin" class="nav navbar-nav navbar-inverse">
+                                <li class="active"><a href="/forum-admin">Gestion de posts</a></li>
+                                <li><a href="/admin-cat">Gestion de catégories</a></li>
+                                <li><a href="/admin-topic">Gestion de topics</a></li>
+                                <li><a href="/admin-user">Gestion d'utilisateurs</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h2>Liste des posts</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Auteur</th>
+                        <th>Topic</th>
+                        <th>Date</th>
+                        <th>Opérations</th>
+                    </tr>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.pseudo }}</td>
+                        <td>{{ post.titre }}</td>
+                        <td>{{ post.datePost }}</td>
+                        <td class="td-cell-align">
+                            <a href={{ "/admin-post/see/#{post.idRep}" }}><i class="icon-file-text"></i></a> <a href={{ "/post-delete/#{post.idRep}" }}><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</main>
+{% endblock %}

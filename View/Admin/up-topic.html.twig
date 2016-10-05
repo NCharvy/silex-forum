@@ -1,0 +1,55 @@
+{% extends "tpl-back.html.twig" %}
+
+{% block css %}
+    <link href="/web/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/web/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/style-admin.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main>
+    <h2>Mettre à jour du topic : {{ topic.titre|convert_encoding('UTF-8', 'ISO-8859-1') }}</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <a class="btn btn-primary" href="{{ referer }}" role="button" style="margin-bottom : 12%;"><i class="icon-circle-arrow-left"></i> Retour</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form class="form-horizontal" method="post" action="/topic-update">
+                    <div class="form-group">
+                        <input type="hidden" name="idSujet" value={{ "#{topic.idSujet}" }}/>
+                        <label for="titre" class="col-sm-4 control-label">Nom du topic : </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="titre" size="50" name="titre" value="{% filter escape %}{% spaceless %} {{ topic.titre|convert_encoding('UTF-8', 'ISO-8859-1') }} {% endspaceless %}{% endfilter %}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="categ" class="col-sm-4">Catégorie : </label>
+                        <div class="col-sm-8">
+                            <select id="categ" name="categ">
+                                <option value="{% filter escape %}{% spaceless %} {{ topic.idCat }} {% endspaceless %}{% endfilter %}">{{ topic.nomCat|convert_encoding('UTF-8', 'ISO-8859-1') }}</option>
+                                {% set testcat = topic.idCat %}
+                                {% for cat in cats %}
+                                    {% if cat.idCat != testcat %}
+                                        <option value="{% filter escape %}{% spaceless %} {{ cat.idCat }} {% endspaceless %}{% endfilter %}">{{ cat.nomCat|convert_encoding('UTF-8', 'ISO-8859-1') }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="button-create btn btn-primary">Mise à jour</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</main>
+{% endblock %}

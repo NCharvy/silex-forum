@@ -1,0 +1,35 @@
+{% extends "tpl-back.html.twig" %}
+
+{% block body %}
+<section id="main-login" class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 centered">
+            <div class="navbar navbar-inverse">
+                <h2 style="color : #fff; text-align : center;">Administration du forum</h2>
+            </div>
+            <form method="post" action="/login/post">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="item-login">
+                            <input type="text" name="login" placeholder="Votre identifiant..." />
+                        </div>
+                        <div class="item-login">
+                            <input type="password" name="passwd" placeholder="Votre mot de passe..." />
+                        </div>
+                        <div class="item-login">
+                            <button type="submit">
+                                Connexion
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </form>
+            <a href="/">Retour au forum</a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</section>
+{% endblock %}

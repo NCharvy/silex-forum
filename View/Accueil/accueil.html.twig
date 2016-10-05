@@ -1,0 +1,20 @@
+{% extends "baseLayout.html.twig" %}
+
+{% block content %}
+    <div class="col-sm-12 col-md-12">
+      <div class="well well-lg">
+		<h1 style="text-align: center">FORUM PROJET PHP</h1>
+		<div class="page-header page-heading">
+		<table class="table forum table-striped">
+		{% for categorie in categories %}
+		  <tr>
+			<th>
+			  <a href="{{categorie.nomCat}}"><h2>{{categorie.nomCat}}</h2></a>
+			</th>
+		  </tr>			
+		{% endfor %}
+		</table>		  
+		</div>
+	</div>
+</div>
+{% endblock %}

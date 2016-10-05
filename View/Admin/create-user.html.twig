@@ -1,0 +1,56 @@
+{% extends "tpl-back.html.twig" %}
+
+{% block content %}
+<main>
+	<h2>Création d'utilisateur</h2>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="pseudo" class="col-sm-2 control-label">Pseudo : </label>
+						<div class="col-sm-4">
+      						<input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo...">
+    					</div>
+    					<label for="passwd" class="col-sm-3 control-label">Mot de passe : </label>
+						<div class="col-sm-3">
+      						<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Mot de passe...">
+    					</div>
+					</div>
+					<div class="form-group">
+						<label for="prenom" class="col-sm-2 control-label">Prénom : </label>
+						<div class="col-sm-4">
+      						<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom...">
+    					</div>
+    					<label for="nomUtil" class="col-sm-2 control-label">Nom : </label>
+						<div class="col-sm-4">
+      						<input type="text" class="form-control" id="nomUtil" name="nomUtil" placeholder="Nom...">
+    					</div>
+					</div>
+					<div class="form-group">
+						<label for="dateNaissance" class="col-sm-4 control-label">Date de naissance : </label>
+						<div class="col-sm-8">
+							<input type="date" class="form-control" id="dateNaissance" name="dateNaissance" placeholder="jj/mm/aaaa" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mail" class="col-sm-4 control-label">Adresse e-mail : </label>
+						<div class="col-sm-8">
+							<input type="email" class="form-control" id="mail" name="mail" placeholder="jean.dupont@domain.fr" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9"></div>
+    					<div class="col-sm-2">
+      						<button type="submit" class="button-create btn btn-primary">Création</button>
+    					</div>
+  					</div>
+				</form>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</main>
+{% endblock %}

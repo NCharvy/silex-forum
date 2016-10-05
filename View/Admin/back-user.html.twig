@@ -1,0 +1,77 @@
+{% extends "tpl-back.html.twig" %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <header class="navbar navbar-inverse">
+                    <div class="container">
+                        <nav id="navbar" class="navbar-collapse collapse">
+                            <ul id="nav-admin" class="nav navbar-nav navbar-inverse">
+                                <li><a href="forum-admin">Gestion de posts</a></li>
+                                <li><a href="admin-cat">Gestion de catégories</a></li>
+                                <li><a href="admin-topic">Gestion de topics</a></li>
+                                <li class="active"><a href="admin-user">Gestion d'utilisateurs</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h2>Liste des utilisateurs</h2>
+        </div>
+        <!--<div class="row btn-admin-class">
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" href="/admin-user/create-form" role="button" style="margin-left : 9%;">Nouvel utilisateur <i class="icon-plus-sign"></i></a>
+            </div>
+        </div>-->
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Rôle</th>
+                        <th>Banni</th>
+                        <th>Opérations</th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.pseudo }}</td>
+                        <td>
+                            {% if user.moderateur == 1 %}
+                            Modérateur
+                            {% elseif user.administrateur == 1 %}
+                            Administrateur
+                            {% else %}
+                            Utilisateur
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.banni == 1 %}
+                            Oui
+                            {% else %}
+                            Non
+                            {% endif %}
+                        </td>
+                        <td class="td-cell-align">
+                            <a href={{ "admin-user/see/#{user.idUtil}" }}><i class="icon-file-text"></i></a> <a href={{ "admin-user/up/#{user.idUtil}" }}><i class="icon-pencil"></i></a> <a href={{ "user-delete/#{user.idUtil}" }}><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</main>
+{% endblock %}

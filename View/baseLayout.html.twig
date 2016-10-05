@@ -1,0 +1,106 @@
+<!DOCTYPE html >
+<html >
+<head >
+	<title >{% block title %}Welcome{% endblock %}</title >
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+   {#  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> #}
+
+	<link href="/web/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<link href="/web/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/web/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	
+</head>
+<body>
+	<br/><br/><br/><br/>
+	
+	
+	<!-- Barre de navigation du haut -->
+	
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <h1><a class="navbar-brand" href="/">Forum PHP</a></h1>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          {% if pseudo is defined %}
+            <ul class="nav navbar-nav navbar-right">
+              <li class="disabled"><a href="#">{{ pseudo.pseudoforum }}</a></li>
+              {% if pseudo.admin %}
+                <li><a href="/login">Partie Admin</a></li>
+              {% endif %}
+              <li><a href="/deconnect">Déconnexion <i class="icon-remove"></i></a></li>
+            </ul>
+          {% elseif error is defined %}
+            <div class="navbar-form navbar-right row">
+              <div class="col-sm-10">
+                <form action="/connect" method="post"> 
+                  <!-- Login -->
+                  <div class="form-group">
+                    <input type="text" placeholder="Pseudonyme" name="pseudo" class="form-control">
+                  </div>
+
+                  <!-- Mot de passe -->
+                  <div class="form-group">
+                    <input type="password" placeholder="Mot de passe" name="pwd" class="form-control">
+                  </div>
+
+                    <!-- Se connecter -->
+                  <input class="btn btn-success" type="submit" value="Se connecter" />
+                  <p>{{ error }}</p>
+                </form>
+              </div>
+              <div class="col-sm-2">
+                <!-- S'inscrire -->
+                <a class="btn btn-success" href="/inscription">S'inscrire</a>
+              </div>
+            </div>
+          {% else %}
+            <div class="navbar-form navbar-right row">
+              <div class="col-sm-10">
+                <form action="/connect" method="post"> 
+                  <!-- Login -->
+                  <div class="form-group">
+                    <input type="text" placeholder="Pseudo" name="pseudo" class="form-control">
+                  </div>
+
+                  <!-- Mot de passe -->
+                  <div class="form-group">
+                    <input type="password" placeholder="Mot de passe" name="pwd" class="form-control">
+                  </div>
+
+                    <!-- Se connecter -->
+                  <input class="btn btn-success" type="submit" value="Se connecter" />
+                </form>
+              </div>
+              <div class="col-sm-2">
+                <!-- S'inscrire -->
+                <a class="btn btn-success" href="/inscription">S'inscrire</a>
+              </div>
+            </div>
+          {% endif %}
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+	{% block content %}
+	{% endblock %}
+	
+	{% block script %}
+	{% endblock %}
+</body>
+</html>

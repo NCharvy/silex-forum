@@ -1,0 +1,71 @@
+{% extends "baseLayout.html.twig" %}
+
+{% block title %}{{ categorie }} - {{ sujet }}{% endblock %}
+
+{% block content %}
+	<main>
+		<header>
+			<h2><a href="/{{ categorie }}">{{ categorie }}</a> / {{ sujet }}</h2>
+		</header>
+
+		<div class="col-xs-1 col-sm-2 col-md-3"></div>
+
+		<div class="col-xs-10 col-sm-8 col-md-6">
+			<section>
+				<div class="row">
+					{% if posts|length == 0 %}
+						<h3>Rien n'a encore été écrit dans ce sujet.</h3>
+						<p>Soyez le premier à le faire !</p>
+					{% else %}
+						<table class="table table-bordered">
+							{% for post in posts %}
+								<tr>
+									<td>
+										<p class="lead">{{ post.pseudo }}</p>
+										<p>écrit le {{ post.datePost|date("m/d/Y à H:i", "Europe/Paris") }}</p>
+									</td>
+									<td>{{ post.texte }}</td>
+								</tr>
+							{% endfor %}
+						</table>
+					{% endif %}
+				</div>
+			</section>
+
+			<section>
+				<div class="row well" id="formulaire">
+					<form action="" method="post">
+						<textarea class="form-control" rows="4" placeholder="Votre réponse..." name="new_post"></textarea>
+						<br/>
+						<button type="submit" class="btn btn-primary">Envoyer</button>
+					</form>
+				</div>
+
+				{% if pseudo is defined and not pseudo.banni %}
+					{% if posts|length == 0 %}
+						<button class="btn btn-primary" id="repondre">Créer le premier post</button>
+					{% else %}
+						<button class="btn btn-primary" id="repondre">Répondre</button>
+					{% endif %}
+				{% endif %}
+			</section>
+		</div>
+
+		<div class="col-xs-1 col-sm-2 col-md-3"></div>
+	</main>
+{% endblock %}
+
+{% block script %}
+	<script>
+		// Au chargement de la page
+		$(document).ready(function(){
+			$("#formulaire").hide();
+		});
+
+		// Après avoir cliqué sur le bouton "Répondre"
+		$("#repondre").click(function() {
+			$("#formulaire").toggle("slide");
+			$("#repondre").hide();
+		});
+	</script>
+{% endblock %}

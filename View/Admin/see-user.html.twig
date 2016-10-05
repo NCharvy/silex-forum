@@ -1,0 +1,52 @@
+{% extends "tpl-back.html.twig" %}
+
+{% block css %}
+    <link href="/web/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/web/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/style-admin.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main>
+    <h2>Fiche détaillée de {{ auser.pseudo }}</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <a class="btn btn-primary" href="{{ referer }}" role="button" style="margin-bottom : 12%;"><i class="icon-circle-arrow-left"></i> Retour</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p><strong>Pseudo :</strong> {{ auser.pseudo }}</p>
+                        <p><strong>Prénom :</strong> {{ auser.prenom|convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
+                        <p><strong>Nom :</strong> {{ auser.nomUtil|convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
+                        <p><strong>Date de naissance :</strong> {{ auser.dateNaissance }}</p>
+                        <p><strong>Adresse e-mail :</strong> {{ auser.courriel }}</p>
+                        <p><strong>Dernière connexion :</strong> {{ auser.derniereConnexion }}</p>
+                        <p><strong>Banni :</strong> 
+                            {% if auser.banni == 1 %}
+                            Oui
+                            {% else %}
+                            Non
+                            {% endif %}
+                        </p>
+                        <p><strong>Rôle :</strong>
+                            {% if auser.moderateur == 1 %}
+                            Modérateur
+                            {% elseif auser.administrateur == 1 %}
+                            Administrateur
+                            {% else %}
+                            Utilisateur
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</main>
+{% endblock %}

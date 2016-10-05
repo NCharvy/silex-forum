@@ -1,0 +1,5 @@
+vendor/*
+connect.php
+forumphp.conf
+.htaccess
+Saves/*
